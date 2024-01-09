@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eo pipefail
+
+DOCKER_IMAGE_TAG=$(git rev-parse --short HEAD)
+
+function build {
+    DOCKER_BUILDKIT=1 \
+        BUILDKIT_PROGRESS=plain \
+        docker build . -t backstage-demo:$DOCKER_IMAGE_TAG
+}
+
+function run {
+    docker run --rm -d -p 8080:8080 --name backstage-demo backstage-demo:$DOCKER_IMAGE_TAG
+}
+
+function help {
+    echo "$0 <task> <args>"
+    echo "Tasks:"
+    compgen -A function | cat -n
+}
+
+TIMEFORMAT="Task completed in %3lR"
+time ${@:-help}
