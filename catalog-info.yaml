@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage-demo-app
+  description: A hello world application
+  annotations:
+    github.com/project-slug: "siavashoutadi/backstage-demo-app"
+  tags:
+    - java
+  links:
+    - url: https://localhost:8080
+      title: Demo app
+      icon: dashboard
+      type: demo
+spec:
+  type: service
+  lifecycle: experimental
+  owner: siavashoutadi
